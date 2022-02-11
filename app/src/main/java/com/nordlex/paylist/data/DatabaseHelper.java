@@ -16,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Contacts";
 
     private static final String KEY_ID = "_id";
+    private static String explanation;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
