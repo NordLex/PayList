@@ -31,5 +31,13 @@ public class MainActivity extends AppCompatActivity {
                 explanationTextView.setText(CodesArray.explanation(numericCode));
             }
         });
+
+        numericCodesInputText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int numericCode = Integer.parseInt(numericCodesInputText.getText().toString());
+                explanationTextView.setText(CodesArray.explanation(numericCode));
+            }
+        });
     }
 }
