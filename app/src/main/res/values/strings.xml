@@ -2,5 +2,17 @@
     <string name="app_name">PayList</string>
     <string name="hint_num_codes">Input Numeric Code</string>
     <string name="explanation">Explanation Numeric Codes</string>
-    <string name="button_text">Find</string>
+    <string name="add_button_text">Add</string>
+    <string name="date">Февраль 2022</string>
+    <string name="clear">1 102.10</string>
+    <string name="income">1 454.50</string>
+    <string name="outcome">352.40</string>
+    <string name="view_num_codes">41</string>
+    <string name="view_cash">429.94</string>
+    <string name="view_description">Description financial operation</string>
+    <string name="input_date">Input Date</string>
+    <string name="save_button_text">Save</string>
+    <string name="new_item_button_text">New Item</string>
+    <string name="input_num_code">Input Code</string>
+    <string name="input_cash">Input Cash</string>
 </resources>

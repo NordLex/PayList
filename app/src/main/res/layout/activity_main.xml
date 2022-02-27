@@ -2,68 +2,35 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:backgroundTint="@color/black"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textViewExplanation"
-        style="@android:style/Widget.Material.TextView"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/roboto"
-        android:gravity="center_horizontal|center_vertical"
-        android:hint="@string/explanation"
-        android:padding="12dp"
-        android:paddingLeft="6dp"
-        android:paddingTop="6dp"
-        android:paddingRight="6dp"
-        android:paddingBottom="6dp"
-        android:textSize="24sp"
-        android:textStyle="italic"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_records_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:endIconMode="clear_text"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_button_text"
+        android:focusable="true"
+        android:foreground="@android:drawable/ic_input_add"
+        android:foregroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewExplanation"
-        app:layout_constraintVertical_bias="0.41000003">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextNumCodes"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:hint="@string/hint_num_codes"
-            android:inputType="number"
-            android:maxLength="3" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:elevation="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/button_text"
-        android:textAlignment="center"
-        android:textColor="@android:color/primary_text_dark"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:maxImageSize="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
