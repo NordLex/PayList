@@ -21,67 +21,69 @@ public class Query {
     private static final String COLUMN_OUTCOME = "Outcome";
 
 
-    public static String getDatabaseName () {
+    public static String getDatabaseName() {
         return DATABASE_NAME;
     }
 
-    public static int getDatabaseVersion () {
+    public static int getDatabaseVersion() {
         return DATABASE_VERSION;
     }
 
-    public static String getTableIncomeName () {
+    public static String getTableIncomeName() {
         return TABLE_INCOME;
     }
 
-    public static String getTableOutcomeName () {
+    public static String getTableOutcomeName() {
         return TABLE_OUTCOME;
     }
 
-    public static String getTableTotalName () {
+    public static String getTableTotalName() {
         return TABLE_TOTAL;
     }
 
-    public static String createIncomeTable () {
-        String query = "create table "+TABLE_INCOME+"("+
+    public static String createIncomeTable() {
+        int length = Explanation.incomeLength();
+        String query = "create table "+TABLE_INCOME+" ( "+
                 COLUMN_ID+" integer primary key autoincrement, "+ COLUMN_DATE +" text unique, ";
-        for (int counter=1;counter<(Explanation.incomeLength()-2);counter++) {
+        for (int counter=1;counter<(length-1);counter++) {
             query = query.concat(COLUMN_DOLLARS+counter+" int, ");
             query = query.concat(COLUMN_CENTS+counter+" int, ");
         }
-        query = query.concat(COLUMN_DOLLARS+(Explanation.incomeLength()-1)+" int, ");
-        query = query.concat(COLUMN_CENTS+(Explanation.incomeLength()-1)+" int )");
+        query = query.concat(COLUMN_DOLLARS+(length-1)+" int, ");
+        query = query.concat(COLUMN_CENTS+(length-1)+" int )");
         return query;
     }
 
-    public static String createOutcomeTable () {
-        String query = "create table "+TABLE_OUTCOME+"("+
+    public static String createOutcomeTable() {
+        int length = Explanation.outcomeLength();
+        String query = "create table "+TABLE_OUTCOME+" ( "+
                 COLUMN_ID+" integer primary key autoincrement, "+ COLUMN_DATE +" text unique, ";
-        for (int cursor=1;cursor<(Explanation.incomeLength()-2);cursor++) {
-            query = query.concat(COLUMN_DOLLARS+cursor+" int, ");
-            query = query.concat(COLUMN_CENTS+cursor+" int, ");
+        for (int cursor=1;cursor<(length-1);cursor++) {
+            query = query.concat(COLUMN_DOLLARS+(cursor+700)+" int, ");
+            query = query.concat(COLUMN_CENTS+(cursor+700)+" int, ");
         }
-        query = query.concat(COLUMN_DOLLARS+(Explanation.outcomeLength()-1)+" int, ");
-        query = query.concat(COLUMN_CENTS+(Explanation.outcomeLength()-1)+" int )");
+        query = query.concat(COLUMN_DOLLARS+(length+699)+" int, ");
+        query = query.concat(COLUMN_CENTS+(length+699)+" int )");
         return query;
     }
 
-    public static String createTotalTable () {
-        return "create table "+TABLE_TOTAL+"("+COLUMN_ID+" integer primary key autoincrement, "+
+    public static String createTotalTable() {
+        return "create table "+TABLE_TOTAL+" ( "+COLUMN_ID+" integer primary key autoincrement, "+
                 COLUMN_DATE+" text unique, "+ COLUMN_CLEAR +" text, "+
-                COLUMN_INCOME+"text, "+COLUMN_OUTCOME+"text )";
+                COLUMN_INCOME+" text, "+COLUMN_OUTCOME+" text )";
     }
 
-    public static ContentValues addRecord (String date, ArrayList<Item> numCodes) {
+    public static ContentValues addRecord(String date, ArrayList<Item> items) {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DATE, date);
-        for (Item item:numCodes) {
+        for (Item item:items) {
             cv.put(COLUMN_DOLLARS+item.getNumCode(), item.getDollars());
             cv.put(COLUMN_CENTS+item.getNumCode(), item.getCents());
         }
         return cv;
     }
 
-    public static ContentValues addRecordToTotal (String date, Total total) {
+    public static ContentValues addRecordToTotal(String date, Total total) {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DATE,date);
         cv.put(COLUMN_CLEAR,total.getClear());
@@ -100,5 +102,9 @@ public class Query {
 
     public static String readRecordFromTotal() {
         return  "select * from "+TABLE_TOTAL+" where "+COLUMN_DATE+" = ?";
+    }
+
+    public static String readAllRecordFromTotal() {
+        return  "select * from "+TABLE_TOTAL;
     }
 }

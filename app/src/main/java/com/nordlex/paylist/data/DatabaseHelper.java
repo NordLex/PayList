@@ -33,11 +33,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private void addRecordToIncome (String date, ArrayList<Item> numCodes) {
+    private void addRecordToIncome (String date, ArrayList<Item> items) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long result = db.insert(Query.getTableIncomeName(), null,Query.addRecord(date, numCodes));
-        db.close();
+        long result = db.insert(Query.getTableIncomeName(), null,Query.addRecord(date, items));
         if (result == -1) {
             Toast.makeText(context, "Income Failed", Toast.LENGTH_SHORT).show();
         } else {
@@ -45,11 +44,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private void addRecordToOutcome (String date, ArrayList<Item> numCodes) {
+    private void addRecordToOutcome (String date, ArrayList<Item> items) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long result = db.insert(Query.getTableOutcomeName(), null,Query.addRecord(date, numCodes));
-        db.close();
+        long result = db.insert(Query.getTableOutcomeName(), null,Query.addRecord(date, items));
         if (result == -1) {
             Toast.makeText(context, "Outcome Failed", Toast.LENGTH_SHORT).show();
         } else {
@@ -61,7 +59,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         long result = db.insert(Query.getTableTotalName(), null,Query.addRecordToTotal(date, total));
-        db.close();
         if (result == -1) {
             Toast.makeText(context, "Total Failed", Toast.LENGTH_SHORT).show();
         } else {
@@ -113,6 +110,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (database != null) {
             cursor=database.rawQuery(Query.readRecordFromTotal(), new String[]{date});
             database.close();
+        }
+        return cursor;
+    }
+
+    public Cursor readAllRecordFromTotal() {
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (database != null) {
+            cursor=database.rawQuery(Query.readAllRecordFromTotal(), null);
         }
         return cursor;
     }
