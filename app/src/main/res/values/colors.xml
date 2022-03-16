@@ -11,4 +11,5 @@
     <color name="nightPrimary">#2C4657</color>
     <color name="secondary">#4E616C</color>
     <color name="secondaryVariant">#8094A0</color>
+    <color name="transparent">#008094A0</color>
 </resources>

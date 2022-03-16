@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.color.DynamicColors;
 import com.nordlex.paylist.data.DatabaseHelper;
 import com.nordlex.paylist.data.Item;
 
@@ -25,6 +26,9 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (DynamicColors.isDynamicColorAvailable()) {
+            DynamicColors.applyIfAvailable(this);
+        }
         setContentView(R.layout.activity_add);
 
         items = new ArrayList<>();

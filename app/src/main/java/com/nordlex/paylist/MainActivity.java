@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.color.DynamicColors;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nordlex.paylist.data.DatabaseHelper;
+import com.nordlex.paylist.data.Month;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (DynamicColors.isDynamicColorAvailable()) {
+            DynamicColors.applyIfAvailable(this);
+        }
         setContentView(R.layout.activity_main);
 
         mainRecycler = findViewById(R.id.main_recycler);
@@ -58,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
-                date.add(cursor.getString(1));
+                String[] dateArr = (cursor.getString(1)).split("\\.");
+                date.add(Month.byNumber(Integer.parseInt(dateArr[0].trim()))+" "+dateArr[1]);
                 clear.add(cursor.getString(2));
                 income.add(cursor.getString(3));
                 outcome.add(cursor.getString(4));
